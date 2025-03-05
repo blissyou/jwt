@@ -14,6 +14,7 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 public class User {
+
     @JsonIgnore
     @Id
     @Column(name = "user_id")
@@ -22,14 +23,15 @@ public class User {
 
     @Column(name= "username",length = 50 ,unique = true)
     private String username;
+
     @Column(name= "password",length = 60)
     private String password;
+
     @Column(name= "nickname",length = 50)
     private String nickname;
 
-    @JsonIgnore
     @Column(name= "activated",length = 50)
-    private Boolean activated;
+    private boolean activated;
 
     @ManyToMany
     @JoinTable(
@@ -37,5 +39,6 @@ public class User {
             joinColumns = {@JoinColumn(name = "user_id",referencedColumnName = "user_id")},
             inverseJoinColumns = {@JoinColumn(name="authority_name",referencedColumnName = "authority_name")}
     )
+
     private Set<Authority> authorities;
 }
